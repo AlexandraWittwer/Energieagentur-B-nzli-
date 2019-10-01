@@ -1,0 +1,88 @@
+package View;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class StartGui extends JFrame {
+	private JFrame frame;
+	private ViewManager viewManager;
+	private JButton exportieren;
+	private JButton importieren;
+	private JButton verbrauchsdiagramm;
+	private JButton jahresverbrauchsdiagramm;
+	private JButton zaehlerstanddiagramm;
+	private JPanel importExport;
+	private JPanel diagramme;
+	
+	public StartGui(JFrame frame, ViewManager viewManager) {
+		this.frame = frame;
+		this.viewManager = viewManager;
+		setTitle("Start");
+	     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	     init();
+  
+	     pack();
+	     setVisible(true);
+	}
+	private void init() {
+		
+		exportieren = new JButton("Exportieren");
+		importieren = new JButton("Importieren");
+		verbrauchsdiagramm = new JButton("Verbrauchsdiagramm");
+		jahresverbrauchsdiagramm = new JButton("Jahresverbrauchsdiagramm");
+		zaehlerstanddiagramm = new JButton("Zählerstanddiagramm");
+		importExport = new JPanel();
+		diagramme = new JPanel();
+		
+		exportieren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                viewManager.openExportierenGui();
+            }
+        });
+		importieren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("In dieser Version ist es noch nicht möglich Daten zu importiern, es werden die aktuellen Daten benutzt.");
+            }
+        });
+		verbrauchsdiagramm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                viewManager.openT_VerbrauchsGui();
+            }
+        });
+		jahresverbrauchsdiagramm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                viewManager.openJ_VerbrauchsGui();
+            }
+        });
+		zaehlerstanddiagramm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                viewManager.openZaehlerstandsGui();
+            }
+        });
+		
+		importExport.setLayout(new GridLayout(4,1));
+		importExport.add(new JLabel());
+		importExport.add(exportieren);
+		importExport.add(importieren);
+		importExport.add(new JLabel());
+		
+		diagramme.setLayout(new GridLayout(5,1));
+		diagramme.add(new JLabel());
+		diagramme.add(verbrauchsdiagramm);
+		diagramme.add(jahresverbrauchsdiagramm);
+		diagramme.add(zaehlerstanddiagramm);
+		diagramme.add(new JLabel());
+		
+		getContentPane().setLayout(new GridLayout(1,2));
+		getContentPane().add(importExport);
+		getContentPane().add(diagramme);
+	}
+}
