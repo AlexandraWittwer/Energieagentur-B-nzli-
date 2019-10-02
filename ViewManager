@@ -1,0 +1,47 @@
+package Control;
+
+import javax.swing.JFrame;
+
+import View.StartGui;
+import View.ZaehlerstandGui;
+import View.T_VerbrauchsGui;
+import View.J_VerbrauchsGui;
+import View.ExportierenGui;
+
+public class ViewManager extends JFrame{
+
+	private ModelManager modelManager;
+	private JFrame frame;
+	private StartGui startGui;
+	private ZaehlerstandGui zaehlerstandGui;
+	private T_VerbrauchsGui t_VerbrauchsGui;
+	private J_VerbrauchsGui j_VerbrauchsGui;
+	private ExportierenGui exportierenGui;
+	
+	public ViewManager(ModelManager _modelManager) {
+		modelManager = _modelManager;
+		startGui = new StartGui(frame, this);
+		zaehlerstandGui = new ZaehlerstandGui(frame, this);
+		t_VerbrauchsGui = new T_VerbrauchsGui(frame, this);
+		j_VerbrauchsGui = new J_VerbrauchsGui(frame, this);
+		exportierenGui = new ExportierenGui(frame, this);
+	}
+	public void openStartGui() {
+		startGui.startGui();
+	}
+	
+	public void openZaehlerstandGui() {
+		zaehlerstandGui.zaehlerstandGui();
+	}
+	
+	public void openT_VerbrauchsGui() {
+		t_VerbrauchsGui.t_VerbrauchsGui();
+	}
+	public void openJ_VerbrauchsGui() {
+		j_VerbrauchsGui.j_VerbrauchsGui();
+	}
+	
+	public void openExportierenGui() {
+		exportierenGui.exportierenGui();
+	}
+}
