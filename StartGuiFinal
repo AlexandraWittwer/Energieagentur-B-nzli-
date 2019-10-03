@@ -1,0 +1,155 @@
+package View;
+/**
+*Teilweise mit GUIGenie generiert
+* @author  Clarissa Sullivan
+* @version 1.1
+* @since   20.08.2019
+*/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+import Control.Manager;
+
+import java.io.IOException;
+import javax.swing.JPanel;
+
+//import javafx.scene.layout.Background;
+
+public class StartGui extends JFrame {
+
+	private JFrame frame;
+	private Manager vm;
+
+	private JButton tagesvbd, jahresvbd, zaehlerstandd;
+	private JButton importbutton, exportbutton;
+	private JLabel copyrighttext;
+
+	private static boolean exception;
+
+	Image img = Toolkit.getDefaultToolkit().getImage("background.jpg");
+
+	public StartGui(JFrame frame, Manager vm) {
+
+		this.frame = frame;
+		this.vm = vm;
+
+		exception = true;
+	}
+
+	public void gui() {
+		tagesvbd = new JButton("Tagesverbrauchsdiagramm");
+		jahresvbd = new JButton("Jahresverbrauchsdiagramm");
+		zaehlerstandd = new JButton("Zählerstanddiagramm");
+		importbutton = new JButton("Importieren");
+		exportbutton = new JButton("Exportieren");
+		copyrighttext = new JLabel("Stromdatenvisualisierer Version 1.0. Alle Rechte vorbehalten.");
+		JPanel panel = new JPanel();
+
+		// TODO Auto-generated method stub
+		frame.setTitle("Start Menu");
+		frame.setPreferredSize(new Dimension(944, 600));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.setPreferredSize(new Dimension(944, 600));
+		panel.setLayout(null);
+
+		panel.add(tagesvbd);
+		panel.add(jahresvbd);
+		panel.add(zaehlerstandd);
+		panel.add(importbutton);
+		panel.add(exportbutton);
+		panel.add(copyrighttext);
+
+		tagesvbd.setBounds(509, 115, 340, 75);
+		jahresvbd.setBounds(505, 240, 340, 75);
+		zaehlerstandd.setBounds(505, 370, 340, 75);
+		importbutton.setBounds(100, 180, 230, 75);
+		exportbutton.setBounds(100, 305, 230, 75);
+		copyrighttext.setBounds(300, 535, 355, 25);
+
+		tagesvbd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (exception == true) {
+					JOptionPane.showMessageDialog(frame,
+							"Es wurden noch keine Daten importiert, deshalb funktioniert dieser Button noch nicht.",
+							"Inane error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					vm.openT_VerbrauchsGui();
+					System.out.println("Tages");
+				}
+			}
+		});
+
+		jahresvbd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (exception == true) {
+					JOptionPane.showMessageDialog(frame,
+							"Es wurde noch nichts importiert. Deshalb funktioniert dieser Button noch nicht.",
+							"Inane error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					vm.openJ_VerbrauchsGui();
+				}
+			}
+		});
+
+		zaehlerstandd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (exception == true) {
+					JOptionPane.showMessageDialog(frame,
+							"Es wurde noch nichts importiert. Deshalb funktioniert dieser Button noch nicht.",
+							"Inane error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					vm.openZaehlerstandGui();
+				}
+			}
+		});
+
+		importbutton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				vm.setEslEinspeisen();
+				vm.setEslBezogen();
+				vm.setSdatEinspeisen();
+				vm.setSdatBezogen();
+				exception = false;
+				vm.openErfolgsGui();
+			}
+		});
+
+		exportbutton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (exception == true) {
+					JOptionPane.showMessageDialog(frame,
+							"Es wurde noch nichts importiert. Deshalb funktioniert dieser Button noch nicht.",
+							"Inane error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					vm.openExportierenGui();
+				}
+			}
+		});
+
+		frame.getContentPane().add(panel);
+
+		frame.pack();
+		frame.setResizable(false);
+		frame.setVisible(true);
+
+	}
+}
