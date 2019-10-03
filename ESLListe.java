@@ -3,10 +3,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ESLListe {
-	public static void main(String[] args) {
-		
-	}
-
+	
 	double[] einspeisen;
 	
 	double[] bezug;
