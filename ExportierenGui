@@ -13,11 +13,14 @@ import javax.swing.*;
 import javax.swing.event.*;
 import org.omg.CORBA.TypeCodePackage.Bounds;
 
+import Control.Manager;
+
 public class ExportierenGui extends JFrame {
 
     private JPanel panel;
     private JRadioButton eingespiesen, verbraucht, beides;
     private JButton httpbutton, csvbutton, jsonbutton, zurueckbutton;
+    private static boolean eb, vb, bb;
 
     private Manager vm;
     private JFrame frame;
@@ -26,6 +29,10 @@ public class ExportierenGui extends JFrame {
 
         this.frame = frame;
         this.vm = vm;
+        
+        eb = false;
+        vb = false;
+        bb = false;
     }
 
     public void gui() {
@@ -61,6 +68,55 @@ public class ExportierenGui extends JFrame {
         panel.add(jsonbutton);
         panel.add(zurueckbutton);
 
+        eingespiesen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                eb = true;
+            }
+        });
+        
+        verbraucht.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vb = true;
+            }
+        });
+        
+        beides.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bb = true;
+            }
+        });
+        
+        httpbutton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Der Export durch einen HTTP-Server ist noch nicht verfügbar.");
+            }
+        });
+        
+        csvbutton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if(eb == true) {
+                	
+                }else if(vb == true) {
+                	
+                }else {
+                	
+                }  
+            	JOptionPane.showMessageDialog(frame, "Das Exportieren der Daten war erfolgreich.", "Inane error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        
+        jsonbutton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	JOptionPane.showMessageDialog(frame, "Der Export durch einen HTTP-Server ist noch nicht verfügbar.");
+            }
+        });
+        
+        zurueckbutton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vm.openStartGui();
+            }
+        });
+        
         frame.getContentPane().add(panel);
 
         frame.pack();
